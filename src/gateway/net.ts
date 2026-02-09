@@ -255,6 +255,23 @@ function isValidIPv4(host: string): boolean {
   });
 }
 
+/**
+ * Check if a hostname or IP refers to the local machine.
+ * Handles: localhost, 127.x.x.x, 0.0.0.0, ::1, [::1], ::, [::], ::ffff:127.x.x.x
+ */
 export function isLoopbackHost(host: string): boolean {
-  return isLoopbackAddress(host);
+  if (!host) {
+    return false;
+  }
+  const h = host.trim().toLowerCase();
+  if (h === "localhost") {
+    return true;
+  }
+  // Handle bracketed IPv6 addresses like [::1]
+  const unbracket = h.startsWith("[") && h.endsWith("]") ? h.slice(1, -1) : h;
+  // 0.0.0.0 binds to all interfaces but is treated as loopback for security
+  if (unbracket === "0.0.0.0" || unbracket === "::" || unbracket === "[::]") {
+    return true;
+  }
+  return isLoopbackAddress(unbracket);
 }
