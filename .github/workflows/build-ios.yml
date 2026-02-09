@@ -33,26 +33,50 @@ jobs:
         working-directory: apps/ios
         run: xcodegen generate
 
-      - name: Build iOS app
+      - name: Create ExportOptions.plist
+        working-directory: apps/ios
+        run: |
+          cat > ExportOptions.plist << 'EOF'
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0">
+          <dict>
+            <key>method</key>
+            <string>development</string>
+            <key>signingStyle</key>
+            <string>automatic</string>
+            <key>teamID</key>
+            <string></string>
+            <key>compileBitcode</key>
+            <false/>
+          </dict>
+          </plist>
+          EOF
+
+      - name: Build iOS app (unsigned)
+        working-directory: apps/ios
+        run: |
+          xcodebuild -project OpenClaw.xcodeproj \
+            -scheme OpenClaw \
+            -destination 'generic/platform=iOS Simulator,name=iPhone 16' \
+            -configuration Debug \
+            build
+
+      - name: Build for device (unsigned)
         working-directory: apps/ios
         run: |
           xcodebuild -project OpenClaw.xcodeproj \
             -scheme OpenClaw \
             -destination 'generic/platform=iOS' \
-            -configuration Release \
-            -archivePath build/OpenClaw.xcarchive \
-            archive
+            -configuration Debug \
+            -allowProvisioningUpdates \
+            CODE_SIGNING_ALLOWED=NO \
+            build
 
-      - name: Export IPA
-        working-directory: apps/ios
-        run: |
-          xcodebuild -exportArchive \
-            -archivePath build/OpenClaw.xcarchive \
-            -exportOptionsPlist ExportOptions.plist \
-            -exportPath build/
-
-      - name: Upload IPA
+      - name: Upload build artifacts
         uses: actions/upload-artifact@v4
         with:
           name: OpenClaw-iOS
-          path: apps/ios/build/*.ipa
+          path: |
+            apps/ios/build/
+            apps/ios/DerivedData/
