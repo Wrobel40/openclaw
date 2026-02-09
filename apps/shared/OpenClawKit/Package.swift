@@ -1,6 +1,6 @@
 // swift-tools-version: 6.0
 
-import PackageDescription
+import PackageDescription(
 
 let package = Package(
     name: "OpenClawKit",
@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "OpenClawChatUI", targets: ["OpenClawChatUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/steipete/ElevenLabsKit", exact: "0.1.0"),
+        // ElevenLabsKit removed - requires Swift 6.2, GitHub Actions has 6.0
         .package(url: "https://github.com/gonzalezreal/textual", exact: "0.3.1"),
     ],
     targets: [
@@ -28,7 +28,7 @@ let package = Package(
             name: "OpenClawKit",
             dependencies: [
                 "OpenClawProtocol",
-                .product(name: "ElevenLabsKit", package: "ElevenLabsKit"),
+                // ElevenLabsKit removed
             ],
             path: "Sources/OpenClawKit",
             resources: [
