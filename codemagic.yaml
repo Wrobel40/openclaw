@@ -13,8 +13,8 @@ workflows:
       - name: Install dependencies
         script: pnpm install
       
-      - name: Install xcodegen
-        script: brew install xcodegen
+      - name: Check xcodegen
+        script: which xcodegen || echo "xcodegen not found, will try without"
       
       - name: Generate Xcode project
         script: cd apps/ios && xcodegen generate
