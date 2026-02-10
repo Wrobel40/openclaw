@@ -1,0 +1,31 @@
+workflows:
+  ios-workflow:
+    name: Build OpenClaw iOS
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      xcode: 16.0
+      node: 22
+    scripts:
+      - name: Install pnpm
+        script: npm install -g pnpm
+      
+      - name: Install dependencies
+        script: pnpm install
+      
+      - name: Install xcodegen
+        script: brew install xcodegen
+      
+      - name: Generate Xcode project
+        script: cd apps/ios && xcodegen generate
+      
+      - name: Build for simulator
+        script: |
+          cd apps/ios
+          xcodebuild -project OpenClaw.xcodeproj \
+            -scheme OpenClaw \
+            -destination 'platform=iOS Simulator,name=iPhone 16' \
+            -configuration Debug \
+            build
+    artifacts:
+      - apps/ios/build/**/*.app
