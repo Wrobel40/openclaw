@@ -1,4 +1,4 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 5.9
 // Package manifest for the OpenClaw macOS companion (menu bar app + IPC library).
 
 import PackageDescription
@@ -6,7 +6,7 @@ import PackageDescription
 let package = Package(
     name: "OpenClaw",
     platforms: [
-        .macOS(.v15),
+        .macOS(.v13),
     ],
     products: [
         .library(name: "OpenClawIPC", targets: ["OpenClawIPC"]),

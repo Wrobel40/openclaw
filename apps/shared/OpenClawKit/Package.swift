@@ -1,12 +1,12 @@
-// swift-tools-version: 6.0
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
     name: "OpenClawKit",
     platforms: [
-        .iOS(.v18),
-        .macOS(.v15),
+        .iOS(.v16),
+        .macOS(.v13),
     ],
     products: [
         .library(name: "OpenClawProtocol", targets: ["OpenClawProtocol"]),
