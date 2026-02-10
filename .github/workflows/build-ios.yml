@@ -47,7 +47,7 @@ jobs:
             -destination 'platform=iOS Simulator,name=iPhone 16' \
             -configuration Debug \
             -skipPackagePluginValidation \
-            build || true
+            build
 
       - name: List build products
         run: find apps/ios -name "*.app" -o -name "*.ipa" 2>/dev/null | head -10
