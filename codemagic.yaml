@@ -7,8 +7,8 @@ workflows:
       xcode: 16.0
       node: 22
     scripts:
-      - name: Install pnpm
-        script: npm install -g pnpm
+      - name: Check/Install pnpm
+        script: which pnpm || npm install -g pnpm
       
       - name: Install dependencies
         script: pnpm install
