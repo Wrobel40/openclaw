@@ -14,10 +14,15 @@ workflows:
         script: pnpm install
       
       - name: Check xcodegen
-        script: which xcodegen || echo "xcodegen not found, will try without"
+        script: which xcodegen || echo "Using pre-generated project"
       
-      - name: Generate Xcode project
-        script: cd apps/ios && xcodegen generate
+      - name: Generate Xcode project (if needed)
+        script: |
+          if [ ! -d "apps/ios/OpenClaw.xcodeproj" ]; then
+            cd apps/ios && xcodegen generate
+          else
+            echo "Using pre-generated project"
+          fi
       
       - name: Build for simulator
         script: |
