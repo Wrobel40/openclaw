@@ -1,6 +1,6 @@
 workflows:
   ios-build:
-    name: OpenClaw ios Build
+    name: OpenClaw iOS Build
     max_build_duration: 60
     environment:
       xcode: latest
@@ -10,15 +10,13 @@ workflows:
         script: |
           npm install -g pnpm
           pnpm install
-
-        - name: generate Xcode project
-         script: |
-          \tcd apps/ios
-          \tpnpm ec xcodegen generate
-
-        - name: Build ios
-         script: |
-          \tcd apps/ios
-          \tcodebuild build -project OpenClaw^.xcodeproj -scheme OpenClaw -destination "generic/platform=ioS Simulator" CODE_SIGNING_ALLOWID=NO
-  artifacts:
-    - apps/ios/build/**
+      - name: generate Xcode project
+        script: |
+          cd apps/ios
+          pnpm exec xcodegen generate
+      - name: Build iOS
+        script: |
+          cd apps/ios
+          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO
+    artifacts:
+      - apps/ios/build/**
