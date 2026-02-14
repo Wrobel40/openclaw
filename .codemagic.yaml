@@ -3,9 +3,8 @@ workflows:
     name: OpenClaw iOS Build
     max_build_duration: 60
     environment:
-      xcode: "26.1"
+      xcode: "15.4"
       node: 22
-      swift: "6.0"
     instance_type: mac_mini_m2_pro
     scripts:
       - name: install dependencies
@@ -19,6 +18,6 @@ workflows:
       - name: Build iOS
         script: |
           cd apps/ios
-          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM= IPHONEOS_DEPLOYMENT_TARGET=18.0
+          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO
     artifacts:
       - apps/ios/build/**
