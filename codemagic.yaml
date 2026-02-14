@@ -1,11 +1,10 @@
 workflows:
   ios-workflow:
     name: Build OpenClaw iOS
-    instance_type: mac_mini_m2_pro
+    instance_type: mac_mini_m4
     max_build_duration: 60
     environment:
       xcode: 16.2
-      swift: 6.0
       node: 22
     scripts:
       - name: Check/Install pnpm
