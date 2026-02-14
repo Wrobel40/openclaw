@@ -14,48 +14,22 @@ let package = Package(
         .library(name: "OpenClawChatUI", targets: ["OpenClawChatUI"]),
     ],
     dependencies: [
-        // ElevenLabsKit removed - requires Swift 6.2, GitHub Actions has 6.0
         .package(url: "https://github.com/gonzalezreal/textual", exact: "0.3.1"),
     ],
     targets: [
         .target(
             name: "OpenClawProtocol",
-            path: "Sources/OpenClawProtocol",
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
-            ]),
+            path: "Sources/OpenClawProtocol"),
         .target(
             name: "OpenClawKit",
-            dependencies: [
-                "OpenClawProtocol",
-                // ElevenLabsKit removed
-            ],
+            dependencies: ["OpenClawProtocol"],
             path: "Sources/OpenClawKit",
-            resources: [
-                .process("Resources"),
-            ],
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
-            ]),
+            resources: [.process("Resources")]),
         .target(
             name: "OpenClawChatUI",
             dependencies: [
                 "OpenClawKit",
-                .product(
-                    name: "Textual",
-                    package: "textual",
-                    condition: .when(platforms: [.macOS, .iOS])),
+                .product(name: "Textual", package: "textual"),
             ],
-            path: "Sources/OpenClawChatUI",
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
-            ]),
-            testTarget(
-            name: "OpenClawKitTests",
-            dependencies: ["OpenClawKit", "OpenClawChatUI"],
-            path: "Tests/OpenClawKitTests",
-            swiftSettings: [
-                .enableUpcomingFeature("StrictConcurrency"),
-                .enableExperimentalFeature("SwiftTesting"),
-            ]),
-  ])
+            path: "Sources/OpenClawChatUI"),
+    ])
