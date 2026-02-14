@@ -6,6 +6,7 @@ workflows:
       xcode: "16.2"
       node: 22
       swift: "6.0"
+    instance_type: mac_mini_m2_pro
     scripts:
       - name: install dependencies
         script: |
