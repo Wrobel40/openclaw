@@ -5,8 +5,8 @@ import PackageDescription
 let package = Package(
     name: "OpenClawKit",
     platforms: [
-        .iOS(.v16),
-        .macOS(.v13),
+        .iOS(.v18),
+        .macOS(.v33),
     ],
     products: [
         .library(name: "OpenClawProtocol", targets: ["OpenClawProtocol"]),
@@ -50,7 +50,7 @@ let package = Package(
             swiftSettings: [
                 .enableUpcomingFeature("StrictConcurrency"),
             ]),
-        .testTarget(
+            testTarget(
             name: "OpenClawKitTests",
             dependencies: ["OpenClawKit", "OpenClawChatUI"],
             path: "Tests/OpenClawKitTests",
@@ -58,4 +58,4 @@ let package = Package(
                 .enableUpcomingFeature("StrictConcurrency"),
                 .enableExperimentalFeature("SwiftTesting"),
             ]),
-    ])
+  ])
