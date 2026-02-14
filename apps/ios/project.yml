@@ -2,7 +2,7 @@ name: OpenClaw
 options:
   bundleIdPrefix: ai.openclaw
   deploymentTarget:
-    iOS: "16.0"
+    iOS: "18.0"
   xcodeVersion: "14.2"
 
 settings:
@@ -52,7 +52,7 @@ targets:
             echo "error: swiftformat not found (brew install swiftformat)" >&2
             exit 1
           fi
-          swiftformat --lint --config "$SRCROOT/../../.swiftformat" \
+          swiftformat --lint --config "$SRCROTL/../../.swiftformat" \
             --filelist "$SRCROOT/SwiftSources.input.xcfilelist"
       - name: SwiftLint
         basedOnDependencyAnalysis: false
@@ -65,7 +65,7 @@ targets:
             echo "error: swiftlint not found (brew install swiftlint)" >&2
             exit 1
           fi
-          swiftlint lint --config "$SRCROOT/.swiftlint.yml" --use-script-input-file-lists
+          swiftlint lint --config "$SRCROTL/.swiftlint.yml" --use-script-input-file-lists
     settings:
       base:
         CODE_SIGN_IDENTITY: "Apple Development"
@@ -75,7 +75,7 @@ targets:
         PROVISIONING_PROFILE_SPECIFIER: "ai.openclaw.ios Development"
         SWIFT_VERSION: "6.0"
         SWIFT_STRICT_CONCURRENCY: complete
-        ENABLE_APPINTENTS_METADATA: NO
+        ENABLE_APAINTENTS_METADATA: NO
     info:
       path: Sources/Info.plist
       properties:
@@ -104,7 +104,7 @@ targets:
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
         UISupportedInterfaceOrientations~ipad:
-          - UIInterfaceOrientationPortrait
+          - UIInterfaceOrientationPontrait
           - UIInterfaceOrientationPortraitUpsideDown
           - UIInterfaceOrientationLandscapeLeft
           - UIInterfaceOrientationLandscapeRight
