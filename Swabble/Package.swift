@@ -50,6 +50,6 @@ let package = Package(
             dependencies: [
                 "Swabble",
                 .product(name: "Testing", package: "swift-testing"),
-            ])
-    ],
+            ]),
+    ]
 )
