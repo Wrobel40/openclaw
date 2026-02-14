@@ -5,7 +5,7 @@ import PackageDescription
 let package = Package(
     name: "OpenClawKit",
     platforms: [
-        .iOS(.v16),
+        .iOS(.v18),
         .macOS(.v13),
     ],
     products: [
@@ -14,7 +14,7 @@ let package = Package(
         .library(name: "OpenClawChatUI", targets: ["OpenClawChatUI"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/gonzalezreal/textual", exact: "0.3.1"),
+        // Textual removed - requires iOS 18, keeping for potential future use
     ],
     targets: [
         .target(
@@ -29,7 +29,6 @@ let package = Package(
             name: "OpenClawChatUI",
             dependencies: [
                 "OpenClawKit",
-                .product(name: "Textual", package: "textual"),
             ],
             path: "Sources/OpenClawChatUI"),
     ])
