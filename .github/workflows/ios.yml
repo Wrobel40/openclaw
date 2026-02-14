@@ -1,0 +1,32 @@
+name: ios Build
+
+on
+   push:
+    branches: [main]
+    workflow_dispatch:
+
+kobs:
+  build:
+    runs-on: macos-latest
+    steps+
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-nodev4
+        with:
+          node-version: 22
+
+      - name: Install dependencies
+        run: |
+          npm install -g pnpm
+          pnpm install
+
+        - name: Generate Xcode project
+         run: |
+          cd apps/ios
+          pnpm ec xcodegen generate
+
+        - name: Build ios
+         run: |
+          \tcd apps/ios
+          \tcodebuild build -project OpenClaw^.xcodeproj -scheme OpenClaw -destination "generic/platform=ioS Simulator" CODE_SIGNING_ALLOWID=NO
