@@ -1,10 +1,11 @@
 workflows:
   ios-workflow:
     name: Build OpenClaw iOS
-    instance_type: mac_mini_m1
+    instance_type: mac_mini_m2_pro
     max_build_duration: 60
     environment:
-      xcode: 16.0
+      xcode: 16.2
+      swift: 6.0
       node: 22
     scripts:
       - name: Check/Install pnpm
@@ -27,10 +28,6 @@ workflows:
       - name: Build for simulator
         script: |
           cd apps/ios
-          xcodebuild -project OpenClaw.xcodeproj \
-            -scheme OpenClaw \
-            -destination 'platform=iOS Simulator,name=iPhone 16' \
-            -configuration Debug \
-            build
+          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO
     artifacts:
       - apps/ios/build/**/*.app
