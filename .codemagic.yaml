@@ -19,6 +19,6 @@ workflows:
       - name: Build iOS
         script: |
           cd apps/ios
-          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO
+          xcodebuild build -project OpenClaw.xcodeproj -scheme OpenClaw -destination "generic/platform=iOS Simulator" CODE_SIGNING_ALLOWED=NO DEVELOPMENT_TEAM= IPHONEOS_DEPLOYMENT_TARGET=18.0
     artifacts:
       - apps/ios/build/**
