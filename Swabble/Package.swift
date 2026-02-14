@@ -52,4 +52,5 @@ let package = Package(
                 .product(name: "Testing", package: "swift-testing"),
             ]),
     ],
-    swiftLanguageModes: [.v6])
+    // swiftLanguageModes: [.v6] // disabled for CI
+
