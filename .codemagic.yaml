@@ -3,8 +3,9 @@ workflows:
     name: OpenClaw iOS Build
     max_build_duration: 60
     environment:
-      xcode: latest
+      xcode: "16.2"
       node: 22
+      swift: "6.0"
     scripts:
       - name: install dependencies
         script: |
